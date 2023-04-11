@@ -1,4 +1,5 @@
 'use strict'
+let employeeList=[];
 function Employee(fullName, emId, department, level, imgUrl, salary){
    this.fullName=fullName;
    this.emId=emId;
@@ -7,7 +8,7 @@ function Employee(fullName, emId, department, level, imgUrl, salary){
    this.imgUrl=`./img/${imgUrl}`;
     this.salary=salary
 }
-
+ 
 Employee.prototype.calculateNetSalary=function(){
     let sala=0;
 if (this.level=="Senior"){
@@ -21,36 +22,62 @@ if (this.level=="Junior"){
 }
 return sala-(sala*(7.5/100))
 }
-Employee.prototype.renderEachEmplyee=function(){
-    document.write(`</br> </br> ${this.fullName} &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  the salary ------>>>> ${this.salary}</br>`)
+
+Employee.prototype.generateId=function(){
+    let uniqueID = Date.now();
+    return uniqueID;
 }
-const ghaziSamer=new Employee('Ghazi Samer',1000,'Administration','Senior','em1.jpg',0);
-ghaziSamer.salary=ghaziSamer.calculateNetSalary();
-ghaziSamer.renderEachEmplyee();
+///////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////
+
+const form=document.getElementById('form');
+
+form.addEventListener("submit", collectData);
 
 
-let lanaAli=new Employee('Lana Ali',1001,'Finance','Senior','em3.jpg',0);
-lanaAli.salary=lanaAli.calculateNetSalary();
-lanaAli.renderEachEmplyee();
+function collectData(event){
 
-let tamaraAyoub=new Employee('Tamara Ayoub',1002,'Marketing','Senior','em6.avif',0);
-tamaraAyoub.salary=tamaraAyoub.calculateNetSalary();
-tamaraAyoub.renderEachEmplyee();
+    event.preventDefault();
+    let fulltName = event.target.fname.value;
+    let depar=event.target.department.value;
+    let lev=event.target.level.value;
+    let imgurl=event.target.imgurl.value;
+    creatEmployee(fulltName,depar,lev,imgurl);
+}
+function creatEmployee(name,department,level,imgUrl){
+  let newemp =new Employee(name,0,department,level,imgUrl,0);
 
-let safiWalid=new Employee('Safi Walid',1003,'Administration','Mid-Senior','em4.jpg',0);
-safiWalid.salary=safiWalid.calculateNetSalary();
-safiWalid.renderEachEmplyee();
+    newemp.emId=newemp.generateId();
+    newemp.salary=newemp.calculateNetSalary();
+employeeList.push(newemp);
+print();
+}
+let body=document.getElementById('body');
+let main=document.getElementById('main')
+let mainCardsDiv=document.createElement('div');
 
-let omarZaid=new Employee('Omar Zaid',1004,'Development','Senior','em5.png',0);
-omarZaid.salary=omarZaid.calculateNetSalary();
-omarZaid.renderEachEmplyee();
+mainCardsDiv.className="mainCardsDiv";
+function print(){
+  for(let i=0; i<employeeList.length;i++){
+     let card=document.createElement('div');
+     card.className="card";
+     let img= document.createElement('img')
+     img.src=employeeList[i].imgUrl;
+      card.appendChild(img);
+     let fnameelement= document.createElement('p')
+     fnameelement.textContent=`Name: ${employeeList[i].fullName} >>>> ID: ${employeeList[i].emId}`;
+     card.appendChild(fnameelement);
+     let depelement= document.createElement('p')
+     depelement.textContent=`Department: ${employeeList[i].department} >>>> Level: ${employeeList[i].level}`;
+     card.appendChild(depelement);
+     let salaryelement= document.createElement('p')
+     salaryelement.textContent=`Salary: ${employeeList[i].salary}`;
+     card.appendChild(salaryelement);
+mainCardsDiv.appendChild(card);
 
-let ranaSaleh=new Employee('Rana Saleh',1005,'Development','Junior','em3.jpg',0);
-ranaSaleh.salary=ranaSaleh.calculateNetSalary();
-ranaSaleh.renderEachEmplyee();
 
-let hadiAhmad=new Employee('Hadi Ahmad',1006,'Finance','Mid-Senior','em1.jpg',0);
-hadiAhmad.salary=hadiAhmad.calculateNetSalary();
-hadiAhmad.renderEachEmplyee();
-
-
+  }
+  main.appendChild(mainCardsDiv);
+   
+}
