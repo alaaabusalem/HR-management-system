@@ -37,7 +37,7 @@ footer{
     padding:10px;
     display: flex;
     background-color: #577D86;
-    margin-top: 10px;
+    
     align-items: center;
     justify-content: space-around;
    
@@ -90,11 +90,14 @@ footer i{
  .card img{
     width: 150px;
     height: 150px;
+    border-radius: 50%;
  }
  .card{
     background-color: #87CBB9;
-    width:400px;
+    width:300px;
     height: 250px;
+    margin-top: 30px;
+
     box-shadow: 5px 5px 20px #87CBB9;
     display: flex;
     flex-direction: column;
@@ -112,8 +115,10 @@ footer i{
     display:flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 100px;
  }
  .mainCardsDiv{
+   width: 60%;
     padding: 50px;
     margin-top: 20px;
     display: flex;
