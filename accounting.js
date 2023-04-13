@@ -23,11 +23,21 @@ let tablefooter=document.createElement('tfoot');
 main.appendChild(mainTableDiv);
 
 
+  
 function addInfoTotable(){
     if(localStorage.getItem('originEmp')){
+        
         let getInfo=JSON.parse(localStorage.getItem('originEmp'));
         let employeeList=[];
         employeeList=getInfo;
+        if(localStorage.getItem('updatingEmp')){
+            let getInfoInUpdating=JSON.parse(localStorage.getItem('updatingEmp'));
+           let localStorgeList=getInfoInUpdating; 
+            localStorgeList.forEach(element => {
+                employeeList.push(element);
+            });
+             
+           }
         console.log(employeeList);
         
         showInfoOnScreen(employeeList,'Finance'); 
