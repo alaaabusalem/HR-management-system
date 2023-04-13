@@ -1,0 +1,23 @@
+th,td{
+    border:1px soid black;
+    font-size: 20px;
+    padding: 10px;
+    text-align: center;
+}
+th{
+    font-weight: bolder;
+}
+.mainTableDiv{
+    width: 60%;
+    padding: 50px;
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content: space-around;
+    background-color: #577D86;
+    
+    margin-top: 100px;
+    box-shadow: 5px 5px 40px #87CBB9;
+    }
+    
