@@ -31,7 +31,7 @@ if (this.level=="Junior"){
      
 }
 sala = sala-(sala*(7.5/100));
-return (Math.round(sala));
+return Math.round(sala);
 }
 
 Employee.prototype.generateId=function(){
@@ -128,14 +128,17 @@ function updateEmpList(){
     if(localStorage.getItem('updatingEmp')){
         let getInfo=JSON.parse(localStorage.getItem('updatingEmp'));
         localStorgeList=getInfo; 
-        localStorgeList.forEach(element => {
-           employeeList.push(element); 
-        });  
+        return localStorgeList;  
        }
+       return null;
 }
 function print(){
-    updateEmpList();
-    
+    let upadtinglist=updateEmpList();
+    if(upadtinglist!=null){
+        upadtinglist.forEach(element => {
+           employeeList.push(element); 
+        });
+    }
   
   for(let i=0; i<employeeList.length;i++){
      let card=document.createElement('div');
