@@ -19,7 +19,7 @@ tableHead.appendChild(tablerow2);
 tableHead.appendChild(tablerow3);
 tableHead.appendChild(tablerow4);
 let tablefooter=document.createElement('tfoot');
-
+table.appendChild(tablefooter);
 main.appendChild(mainTableDiv);
 
 
@@ -44,6 +44,7 @@ function addInfoTotable(){
         showInfoOnScreen(employeeList,'Marketing'); 
         showInfoOnScreen(employeeList,'Administration'); 
         showInfoOnScreen(employeeList,'Development'); 
+        netTotal(employeeList);
     }
 
 }
@@ -76,3 +77,33 @@ function showInfoOnScreen(employeeList,dep){
     table.appendChild(tableRow);
 }
 addInfoTotable();
+function netTotal(employeeList){
+    let count=0;
+    let totalSalary=0;
+    let totalEmployeesNum=0;
+    for(let i=0;i<employeeList.length;i++){
+         count+=1;
+         totalSalary+=employeeList[i].salary;
+
+    }
+    let avg=totalSalary/count;
+    avg=Math.round(avg);
+    let tableRow=document.createElement('tr');
+    let rowName=document.createElement('td');
+    rowName.style.fontWeight=700;
+    rowName.textContent="total";
+    let rowEmpNum=document.createElement('td');
+    rowEmpNum.textContent=`${count}`;
+    rowEmpNum.style.fontWeight=700;
+    let rowAvg=document.createElement('td');
+    rowAvg.textContent=`${avg}`;
+    rowAvg.style.fontWeight=700;
+     let rowTotalSalary=document.createElement('td');
+    rowTotalSalary.textContent=`${totalSalary}`;
+    rowTotalSalary.style.fontWeight=700;
+    tableRow.appendChild(rowName);
+    tableRow.appendChild(rowEmpNum);
+    tableRow.appendChild(rowAvg);
+    tableRow.appendChild(rowTotalSalary);
+    tablefooter.appendChild(tableRow);
+}
